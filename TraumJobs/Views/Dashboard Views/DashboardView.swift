@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @AppStorage("username") private var username: String = "Gast"
+    
     var body: some View {
-        Text("Dashboard")
+        VStack {
+            Spacer()
+            Text("Willkommen, \(username)!")
+            Spacer()
+            HStack {
+                Text("Neuer Name:")
+                TextField("Username", text: $username)
+            }
+            Spacer()
+        }
+        .padding()
     }
 }
 

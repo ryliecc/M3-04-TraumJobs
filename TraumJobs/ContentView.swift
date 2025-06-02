@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection: TabSelection = .dashboard
-    
     var body: some View {
         TabView(selection: $selection) {
             Tab("Dashboard", systemImage: "house", value: .dashboard) {
