@@ -6,10 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct JobsView: View {
+    @Environment(\.modelContext) private var context
+    @Query private var jobs: [Job]
+    
+    @State var sheetIsVisible: Bool = false
     var body: some View {
-        Text("Jobs")
+        VStack {
+            Text("Jobs")
+                .font(.headline)
+            Button("Neuen Job hinzufügen") {
+                sheetIsVisible = true
+            }
+        }
+        .sheet(isPresented: $sheetIsVisible) {
+            JobAddView(sheetIsVisible: $sheetIsVisible)
+        }
     }
 }
 

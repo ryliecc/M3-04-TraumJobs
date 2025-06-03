@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct JobAddView: View {
     @Environment(\.modelContext) private var context
+    @Binding var sheetIsVisible: Bool
     @State var title: String = ""
     @State var details: String = ""
     @State var salaryText: String = ""
@@ -33,10 +35,12 @@ struct JobAddView: View {
                 HStack {
                     Button("Abbrechen") {
                         resetForm()
+                        sheetIsVisible = false
                     }
                     Button("Speichern") {
                         addJob()
                         resetForm()
+                        sheetIsVisible = false
                     }
                 }
             }
@@ -56,5 +60,6 @@ struct JobAddView: View {
 }
 
 #Preview {
-    JobAddView()
+    @Previewable @State var sheetIsVisible: Bool = true
+    JobAddView(sheetIsVisible: $sheetIsVisible)
 }
