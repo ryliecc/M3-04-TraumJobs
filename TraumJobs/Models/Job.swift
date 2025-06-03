@@ -12,11 +12,13 @@ import SwiftData
 class Job: Identifiable {
     var id = UUID()
     var title: String
+    var details: String
     var salary: Double
     var isFavorite: Bool
     
-    init(title: String, salary: Double, isFavorite: Bool = false) {
+    init(title: String, details: String, salary: Double, isFavorite: Bool = false) {
         self.title = title
+        self.details = details
         self.salary = salary
         self.isFavorite = isFavorite
     }
