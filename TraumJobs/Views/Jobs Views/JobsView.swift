@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct JobsView: View {
-    @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
     
     @State var sheetIsVisible: Bool = false
@@ -19,6 +18,11 @@ struct JobsView: View {
                 .font(.headline)
             Button("Neuen Job hinzufügen") {
                 sheetIsVisible = true
+            }
+            List {
+                ForEach(jobs) { job in
+                    Text(job.title)
+                }
             }
         }
         .sheet(isPresented: $sheetIsVisible) {

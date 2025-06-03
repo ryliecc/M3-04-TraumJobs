@@ -9,14 +9,13 @@ import Foundation
 import SwiftData
 
 @Model
-class Job: Identifiable {
-    var id = UUID()
+class Job {
     var title: String
     var details: String
-    var salary: Double
+    var salary: Int
     var isFavorite: Bool
     
-    init(title: String, details: String, salary: Double, isFavorite: Bool = false) {
+    init(title: String, details: String, salary: Int, isFavorite: Bool = false) {
         self.title = title
         self.details = details
         self.salary = salary
