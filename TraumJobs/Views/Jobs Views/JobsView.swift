@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct JobsView: View {
+    @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
     
     @State var sheetIsVisible: Bool = false
@@ -21,7 +22,19 @@ struct JobsView: View {
             }
             List {
                 ForEach(jobs) { job in
-                    Text(job.title)
+                    JobListItemView(job: job)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                context.delete(job)
+                            } label: {
+                                Label("Löschen", systemImage: "trash")
+                            }
+                            Button {
+                                job.isFavorite.toggle()
+                            } label: {
+                                Label(job.isFavorite ? "Entfavorisieren" : "Favorisieren", systemImage: "star")
+                            }
+                        }
                 }
             }
         }
