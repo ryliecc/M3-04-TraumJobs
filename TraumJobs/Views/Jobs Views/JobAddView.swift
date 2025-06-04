@@ -40,6 +40,7 @@ struct JobAddView: View {
                     resetForm()
                     sheetIsVisible = false
                 }
+                .disabled(title.isEmpty || details.isEmpty || salary <= 0)
                 .frame(width: .infinity)
             }
             .padding()
