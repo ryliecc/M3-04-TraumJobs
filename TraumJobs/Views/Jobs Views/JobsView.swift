@@ -10,7 +10,7 @@ import SwiftData
 
 struct JobsView: View {
     @Environment(\.modelContext) private var context
-    @Query private var jobs: [Job]
+    @Query(sort: \Job.title) private var jobs: [Job]
     
     @State var sheetIsVisible: Bool = false
     var body: some View {

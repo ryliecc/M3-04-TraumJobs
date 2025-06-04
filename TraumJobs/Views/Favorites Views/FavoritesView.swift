@@ -13,7 +13,7 @@ struct FavoritesView: View {
         filter: #Predicate<Job> { job in
             job.isFavorite
         }
-    ) var jobs: [Job]
+        , sort: \Job.title) var jobs: [Job]
     
     var body: some View {
         Text("Favoriten")
