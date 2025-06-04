@@ -13,3 +13,15 @@ enum TabSelection {
     case favorites
     case skills
 }
+
+enum AppLanguage: String, CaseIterable {
+    case german = "Deutsch"
+    case english = "Englisch"
+    case japanese = "Japanisch"
+}
+
+enum ThemeMode: String, CaseIterable {
+    case light = "Light"
+    case dark = "Dark"
+    case system = "System"
+}
