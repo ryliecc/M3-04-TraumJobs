@@ -9,19 +9,24 @@ import SwiftUI
 
 struct DashboardView: View {
     @AppStorage("username") private var username: String = "Gast"
+    @State var sheetIsVisible: Bool = false
+    @State var newUsername: String = "Gast"
     
     var body: some View {
         VStack {
             Spacer()
             Text("Willkommen, \(username)!")
             Spacer()
-            HStack {
-                Text("Neuer Name:")
-                TextField("Username", text: $username)
+            Button("Einstellungen öffnen") {
+                newUsername = username
+                sheetIsVisible = true
             }
             Spacer()
         }
         .padding()
+        .sheet(isPresented: $sheetIsVisible) {
+            DashboardSettings(sheetIsVisible: $sheetIsVisible, newUsername: $newUsername)
+        }
     }
 }
 
