@@ -13,6 +13,7 @@ struct JobsView: View {
     @Query(sort: \Job.title) private var jobs: [Job]
     
     @State var sheetIsVisible: Bool = false
+    @State var detailsIsVisible: Bool = false
     var body: some View {
         VStack {
             Text("Jobs")
@@ -34,6 +35,12 @@ struct JobsView: View {
                             } label: {
                                 Label(job.isFavorite ? "Entfavorisieren" : "Favorisieren", systemImage: "star")
                             }
+                        }
+                        .onTapGesture {
+                            detailsIsVisible = true
+                        }
+                        .sheet(isPresented: $detailsIsVisible) {
+                            JobDetailView(job: job, isVisible: $detailsIsVisible)
                         }
                 }
             }
