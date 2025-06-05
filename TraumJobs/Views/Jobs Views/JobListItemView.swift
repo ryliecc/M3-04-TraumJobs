@@ -31,6 +31,7 @@ struct JobListItemView: View {
 }
 
 #Preview {
-    @Previewable var job = Job(title: "iOS Developer", details: "Junior Entwickler gesucht mit Web Dev Erfahrung", salary: 40000, isFavorite: true)
+    @Previewable var job = Job(title: "iOS Developer", details: "Junior Entwickler gesucht mit Web Dev Erfahrung", salary: 40000, skills: [Skill(title: "SwiftUI", level: .high), Skill(title: "React", level: .medium)], isFavorite: true)
+    
     JobListItemView(job: job)
 }

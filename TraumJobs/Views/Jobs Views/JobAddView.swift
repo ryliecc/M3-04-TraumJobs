@@ -13,6 +13,9 @@ struct JobAddView: View {
     @Binding var sheetIsVisible: Bool
     @State var title: String = ""
     @State var details: String = ""
+    @State var skills: [Skill] = []
+    @State var newSkillName: String = ""
+    @State var newSkillLevel: SkillLevel = .medium
     @State var salary: Int = 0
     var body: some View {
         VStack {
@@ -25,6 +28,32 @@ struct JobAddView: View {
                     TextField("Jobtitel", text: $title)
                     TextField("Gehalt", value: $salary, format: .number)
                         .keyboardType(.numbersAndPunctuation)
+                }
+                Section("Skills") {
+                    List {
+                        ForEach(skills, id: \.id) { skill in
+                            Text("\(skill.title) - \(skill.level.rawValue)")
+                        }
+                    }
+                    HStack {
+                        VStack {
+                            TextField("Skill Titel", text: $newSkillName)
+                            Picker("Skill Level", selection: $newSkillLevel) {
+                                ForEach(SkillLevel.allCases, id: \.rawValue) { level in
+                                    Text(level.rawValue).tag(level)
+                                }
+                            }
+                            .pickerStyle(.wheel)
+                            .frame(height: 56)
+                        }
+                        Button("Hinzufügen") {
+                            let newSkill = Skill(title: newSkillName, level: newSkillLevel)
+                            skills.append(newSkill)
+                            newSkillName = ""
+                        }
+                    }
+                }
+                Section("Weitere Details") {
                     TextField("Weitere Details", text: $details)
                 }
             }
@@ -49,7 +78,7 @@ struct JobAddView: View {
     }
 
     private func addJob() {
-        let job = Job(title: title, details: details, salary: salary)
+        let job = Job(title: title, details: details, salary: salary, skills: skills)
         context.insert(job)
     }
 

@@ -25,3 +25,11 @@ enum ThemeMode: String, CaseIterable {
     case dark = "Dark"
     case system = "System"
 }
+
+enum SkillLevel: String, CaseIterable, Codable {
+    case veryLow = "sehr niedrig"
+    case low = "niedrig"
+    case medium = "mittel"
+    case high = "hoch"
+    case veryHigh = "sehr hoch"
+}
