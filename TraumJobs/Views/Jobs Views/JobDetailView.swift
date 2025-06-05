@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct JobDetailView: View {
+    @Environment(\.modelContext) private var context
+    
     var job: Job
     @Binding var isVisible: Bool
+    @State var showDeleteAlert: Bool = false
     var body: some View {
         VStack {
             Text(job.title)
@@ -22,6 +26,16 @@ struct JobDetailView: View {
             }
             Text("Weitere Details:\n\(job.details)")
                 .multilineTextAlignment(.leading)
+            Button("Eintrag löschen") {
+                showDeleteAlert = true
+            }
+            .alert("Eintrag löschen", isPresented: $showDeleteAlert) {
+                Button("Abbrechen", role: .cancel) {}
+                Button("Löschen") {
+                    context.delete(job)
+                    isVisible = false
+                }
+            }
             Button("Schließen") {
                 isVisible = false
             }
