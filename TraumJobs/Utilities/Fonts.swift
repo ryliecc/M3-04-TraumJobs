@@ -10,4 +10,5 @@ import SwiftUI
 
 struct Fonts {
     static let headerText = Font.custom("Oswald-Medium", size: 56)
+    static let dashboardGreeting = Font.custom("RobotoCondensed-Regular", size: 48)
 }

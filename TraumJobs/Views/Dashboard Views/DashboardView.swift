@@ -27,11 +27,13 @@ struct DashboardView: View {
     @State var newFontSize: Double = 1.0
     
     var body: some View {
-        VStack {
-            Spacer()
-            Text("Willkommen, \(username)!")
-            Spacer()
-            Button("Einstellungen öffnen") {
+        ZStack {
+            Text("Willkommen,\n\(username)!")
+                .padding()
+                .multilineTextAlignment(.center)
+                .font(Fonts.dashboardGreeting)
+                .position(x: 200, y: 100)
+            Button {
                 newUsername = username
                 newEmail = email
                 newBirthdate = birthdate
@@ -41,10 +43,16 @@ struct DashboardView: View {
                 newAppThemeMode = appThemeMode
                 newFontSize = fontSize
                 sheetIsVisible = true
+            } label: {
+                Image(systemName: "gear")
             }
-            Spacer()
+            .font(.system(size: 32))
+            .padding(12)
+            .foregroundColor(.white)
+            .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
+            .position(x: 340, y: 580)
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .sheet(isPresented: $sheetIsVisible) {
             DashboardSettings(sheetIsVisible: $sheetIsVisible, newUsername: $newUsername, newEmail: $newEmail, newBirthdate: $newBirthdate, newLocation: $newLocation, newNotificationsAllowed: $newNotificationsAllowed, newAppLanguage: $newAppLanguage, newAppThemeMode: $newAppThemeMode, newFontSize: $newFontSize)
         }

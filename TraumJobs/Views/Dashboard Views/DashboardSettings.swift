@@ -67,13 +67,15 @@ struct DashboardSettings: View {
                     }
                 }
             }
-            HStack {
+            HStack(alignment: .center, spacing: 24) {
                 Button("Abbrechen") {
                     newUsername = username
                     sheetIsVisible = false
                 }
                 .padding()
-                .frame(width: .infinity)
+                .frame(width: 120)
+                .foregroundColor(.white)
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
                 Spacer()
                 Button("Speichern") {
                     username = newUsername
@@ -87,10 +89,11 @@ struct DashboardSettings: View {
                     sheetIsVisible = false
                 }
                 .padding()
-                .frame(width: .infinity)
+                .frame(width: 120)
+                .foregroundColor(.white)
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color("SecondaryColor")))
             }
-            .padding()
-            .padding(.horizontal, 22)
+            .padding(.horizontal, 40)
         }
     }
 }
