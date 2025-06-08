@@ -47,7 +47,7 @@ struct DashboardView: View {
                 Image(systemName: "gear")
             }
             .font(.system(size: 32))
-            .padding(12)
+            .padding()
             .foregroundColor(.white)
             .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
             .position(x: 340, y: 580)

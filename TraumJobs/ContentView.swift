@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection: TabSelection = .dashboard
+    @State private var selection: TabSelection = .jobs
     var body: some View {
         VStack(spacing: 0) {
             HeaderView()

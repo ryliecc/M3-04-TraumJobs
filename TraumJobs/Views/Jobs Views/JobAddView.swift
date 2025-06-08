@@ -57,11 +57,15 @@ struct JobAddView: View {
                     TextField("Weitere Details", text: $details)
                 }
             }
+            .tint(Color("PrimaryColor"))
             HStack {
                 Button("Abbrechen") {
                     resetForm()
                     sheetIsVisible = false
                 }
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color("SecondaryColor")))
+                .foregroundColor(.white)
                 .frame(width: .infinity)
                 Spacer()
                 Button("Speichern") {
@@ -71,9 +75,12 @@ struct JobAddView: View {
                 }
                 .disabled(title.isEmpty || details.isEmpty || salary <= 0)
                 .frame(width: .infinity)
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
+                .foregroundColor(.white)
             }
             .padding()
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 16)
         }
     }
 

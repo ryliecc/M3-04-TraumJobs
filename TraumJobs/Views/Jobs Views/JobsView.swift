@@ -15,38 +15,49 @@ struct JobsView: View {
     @State var sheetIsVisible: Bool = false
     @State var detailsIsVisible: Bool = false
     var body: some View {
-        VStack {
-            Text("Jobs")
-                .font(.headline)
-            Button("Neuen Job hinzufügen") {
-                sheetIsVisible = true
-            }
-            List {
-                ForEach(jobs) { job in
-                    JobListItemView(job: job)
-                        .swipeActions {
-                            Button(role: .destructive) {
-                                context.delete(job)
-                            } label: {
-                                Label("Löschen", systemImage: "trash")
+        ZStack {
+            VStack {
+                Text("Jobs")
+                    .font(Fonts.listHeadline)
+                List {
+                    ForEach(jobs) { job in
+                        JobListItemView(job: job)
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    context.delete(job)
+                                } label: {
+                                    Label("Löschen", systemImage: "trash")
+                                }
+                                Button {
+                                    job.isFavorite.toggle()
+                                } label: {
+                                    Label(job.isFavorite ? "Entfavorisieren" : "Favorisieren", systemImage: "star")
+                                }
                             }
-                            Button {
-                                job.isFavorite.toggle()
-                            } label: {
-                                Label(job.isFavorite ? "Entfavorisieren" : "Favorisieren", systemImage: "star")
+                            .onTapGesture {
+                                detailsIsVisible = true
                             }
-                        }
-                        .onTapGesture {
-                            detailsIsVisible = true
-                        }
-                        .sheet(isPresented: $detailsIsVisible) {
-                            JobDetailView(job: job, isVisible: $detailsIsVisible)
-                        }
+                            .sheet(isPresented: $detailsIsVisible) {
+                                JobDetailView(job: job, isVisible: $detailsIsVisible)
+                            }
+                    }
                 }
             }
+            .padding()
+            .sheet(isPresented: $sheetIsVisible) {
+                JobAddView(sheetIsVisible: $sheetIsVisible)
+            }
+            
+        Button {
+            sheetIsVisible = true
+        } label: {
+            Image(systemName: "plus")
         }
-        .sheet(isPresented: $sheetIsVisible) {
-            JobAddView(sheetIsVisible: $sheetIsVisible)
+        .font(.system(size: 32))
+        .padding()
+        .foregroundColor(.white)
+        .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
+        .position(x: 356, y: 584)
         }
     }
 }

@@ -15,20 +15,37 @@ struct JobDetailView: View {
     @Binding var isVisible: Bool
     @State var showDeleteAlert: Bool = false
     var body: some View {
-        VStack {
-            Text(job.title)
-            Text("Jahresgehalt: \(job.salary.formatted())€")
-            Text("Benötigte Skills:")
-            VStack {
-                ForEach(job.skills, id: \.id) { skill in
-                    Text("\(skill.title) - \(skill.level.rawValue)")
+        ZStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(job.title)
+                        .font(Fonts.listItemTitle)
+                    Text("Jahresgehalt: \(job.salary.formatted())€")
+                    VStack {
+                        Text("Benötigte Skills:")
+                            .underline()
+                        ForEach(job.skills, id: \.id) { skill in
+                            Text("\(skill.title) - \(skill.level.rawValue)")
+                        }
+                    }
+                    Text("Weitere Details:\n\(job.details)")
+                        .multilineTextAlignment(.leading)
                 }
+                .frame(maxWidth: .infinity)
+                .font(Fonts.listItemText)
             }
-            Text("Weitere Details:\n\(job.details)")
-                .multilineTextAlignment(.leading)
-            Button("Eintrag löschen") {
+            .frame(maxWidth: .infinity)
+            .padding(.top, 80)
+            Button {
                 showDeleteAlert = true
+            } label: {
+                Image(systemName: "trash")
+                    .font(.system(size: 26))
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
             }
+            .position(x: 360, y: 680)
             .alert("Eintrag löschen", isPresented: $showDeleteAlert) {
                 Button("Abbrechen", role: .cancel) {}
                 Button("Löschen") {
@@ -36,10 +53,18 @@ struct JobDetailView: View {
                     isVisible = false
                 }
             }
-            Button("Schließen") {
+            Button {
                 isVisible = false
+            } label: {
+                Image(systemName: "xmark.app")
+                    .font(.system(size: 32))
+                    .padding(12)
+                    .foregroundColor(.white)
+                    .background(RoundedRectangle(cornerRadius: 8).fill(Color("SecondaryColor")))
             }
+            .position(x: 48, y: 40)
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

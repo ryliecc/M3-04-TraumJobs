@@ -13,20 +13,22 @@ struct JobListItemView: View {
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: job.isFavorite ? "star.fill" : "star")
-                .font(.system(size: 24))
-            VStack(alignment: .center) {
+                .font(.system(size: 40))
+                .foregroundColor(job.isFavorite ? Color("PrimaryColor") : .white)
+            VStack(alignment: .center, spacing: 8) {
                 Text(job.title)
-                    .font(.title3)
+                    .font(Fonts.listItemTitle)
                     .bold()
                     .multilineTextAlignment(.center)
                 Text("\(job.salary.formatted())€")
+                    .font(Fonts.listItemText)
             }
-            Text(job.details)
-                .multilineTextAlignment(.leading)
+            .frame(maxWidth: .infinity)
         }
+        .foregroundColor(.white)
         .frame(maxWidth: .infinity)
         .padding()
-        .background(RoundedRectangle(cornerRadius: 8).fill(.yellow))
+        .background(RoundedRectangle(cornerRadius: 8).fill(Color("SecondaryColor")))
     }
 }
 
