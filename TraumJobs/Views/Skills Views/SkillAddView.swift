@@ -42,12 +42,12 @@ struct SkillAddView: View {
             }
         }
     }
-    
+
     private func resetForm() {
         newSkillTitle = ""
         newSkillLevel = .medium
     }
-    
+
     private func addSkill() {
         let newSkill = Skill(title: newSkillTitle, level: newSkillLevel)
         context.insert(newSkill)

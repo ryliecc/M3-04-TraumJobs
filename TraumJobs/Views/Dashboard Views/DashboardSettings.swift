@@ -12,7 +12,8 @@ struct DashboardSettings: View {
     @AppStorage("email") private var email: String = "example@mail.com"
     @AppStorage("birthdate") private var birthdate: Date = Date()
     @AppStorage("location") private var location: String = "Berlin"
-    @AppStorage("notificationsAllowed") private var notificationsAllowed: Bool = false
+    @AppStorage("notificationsAllowed") private var notificationsAllowed: Bool =
+        false
     @AppStorage("appLanguage") private var appLanguage: AppLanguage = .german
     @AppStorage("appThemeMode") private var appThemeMode: ThemeMode = .system
     @AppStorage("fontSize") private var fontSize: Double = 1.0
@@ -36,17 +37,25 @@ struct DashboardSettings: View {
                     TextField("Email", text: $newEmail)
                 }
                 Section("Geburtsdatum") {
-                    DatePicker("Birthday", selection: $newBirthdate, displayedComponents: .date)
+                    DatePicker(
+                        "Birthday",
+                        selection: $newBirthdate,
+                        displayedComponents: .date
+                    )
                 }
                 Section("Standort") {
                     TextField("Location", text: $newLocation)
                 }
                 Section("Benachrichtigungen") {
-                    Toggle("Benachrichtigungen zulassen", isOn: $newNotificationsAllowed)
+                    Toggle(
+                        "Benachrichtigungen zulassen",
+                        isOn: $newNotificationsAllowed
+                    )
                 }
                 Section("Sprache ändern") {
                     Picker("Language", selection: $newAppLanguage) {
-                        ForEach(AppLanguage.allCases, id: \.rawValue) { language in
+                        ForEach(AppLanguage.allCases, id: \.rawValue) {
+                            language in
                             Text(language.rawValue).tag(language)
                         }
                     }
@@ -75,7 +84,11 @@ struct DashboardSettings: View {
                 .padding()
                 .frame(width: 120)
                 .foregroundColor(.white)
-                .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
+                .background(
+                    RoundedRectangle(cornerRadius: 8).fill(
+                        Color("PrimaryColor")
+                    )
+                )
                 Spacer()
                 Button("Speichern") {
                     username = newUsername
@@ -91,7 +104,11 @@ struct DashboardSettings: View {
                 .padding()
                 .frame(width: 120)
                 .foregroundColor(.white)
-                .background(RoundedRectangle(cornerRadius: 8).fill(Color("SecondaryColor")))
+                .background(
+                    RoundedRectangle(cornerRadius: 8).fill(
+                        Color("SecondaryColor")
+                    )
+                )
             }
             .padding(.horizontal, 40)
         }
@@ -108,5 +125,15 @@ struct DashboardSettings: View {
     @Previewable @State var newAppLanguage: AppLanguage = .german
     @Previewable @State var newAppThemeMode: ThemeMode = .system
     @Previewable @State var newFontSize: Double = 1.0
-    DashboardSettings(sheetIsVisible: $sheetIsVisible, newUsername: $newUsername, newEmail: $newEmail, newBirthdate: $newBirthdate, newLocation: $newLocation, newNotificationsAllowed: $newNotificationsAllowed, newAppLanguage: $newAppLanguage, newAppThemeMode: $newAppThemeMode, newFontSize: $newFontSize)
+    DashboardSettings(
+        sheetIsVisible: $sheetIsVisible,
+        newUsername: $newUsername,
+        newEmail: $newEmail,
+        newBirthdate: $newBirthdate,
+        newLocation: $newLocation,
+        newNotificationsAllowed: $newNotificationsAllowed,
+        newAppLanguage: $newAppLanguage,
+        newAppThemeMode: $newAppThemeMode,
+        newFontSize: $newFontSize
+    )
 }

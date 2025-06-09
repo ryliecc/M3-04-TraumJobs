@@ -12,7 +12,8 @@ struct DashboardView: View {
     @AppStorage("email") private var email: String = "example@mail.com"
     @AppStorage("birthdate") private var birthdate: Date = Date()
     @AppStorage("location") private var location: String = "Berlin"
-    @AppStorage("notificationsAllowed") private var notificationsAllowed: Bool = false
+    @AppStorage("notificationsAllowed") private var notificationsAllowed: Bool =
+        false
     @AppStorage("appLanguage") private var appLanguage: AppLanguage = .german
     @AppStorage("appThemeMode") private var appThemeMode: ThemeMode = .system
     @AppStorage("fontSize") private var fontSize: Double = 1.0
@@ -25,7 +26,7 @@ struct DashboardView: View {
     @State var newAppLanguage: AppLanguage = .german
     @State var newAppThemeMode: ThemeMode = .system
     @State var newFontSize: Double = 1.0
-    
+
     var body: some View {
         ZStack {
             Text("Willkommen,\n\(username)!")
@@ -49,12 +50,24 @@ struct DashboardView: View {
             .font(.system(size: 32))
             .padding()
             .foregroundColor(.white)
-            .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
-            .position(x: 340, y: 580)
+            .background(
+                RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor"))
+            )
+            .position(x: 356, y: 584)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .sheet(isPresented: $sheetIsVisible) {
-            DashboardSettings(sheetIsVisible: $sheetIsVisible, newUsername: $newUsername, newEmail: $newEmail, newBirthdate: $newBirthdate, newLocation: $newLocation, newNotificationsAllowed: $newNotificationsAllowed, newAppLanguage: $newAppLanguage, newAppThemeMode: $newAppThemeMode, newFontSize: $newFontSize)
+            DashboardSettings(
+                sheetIsVisible: $sheetIsVisible,
+                newUsername: $newUsername,
+                newEmail: $newEmail,
+                newBirthdate: $newBirthdate,
+                newLocation: $newLocation,
+                newNotificationsAllowed: $newNotificationsAllowed,
+                newAppLanguage: $newAppLanguage,
+                newAppThemeMode: $newAppThemeMode,
+                newFontSize: $newFontSize
+            )
         }
     }
 }

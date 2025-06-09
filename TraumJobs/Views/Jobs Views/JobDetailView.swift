@@ -5,12 +5,12 @@
 //  Created by Rylie Castell on 05.06.25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct JobDetailView: View {
     @Environment(\.modelContext) private var context
-    
+
     var job: Job
     @Binding var isVisible: Bool
     @State var showDeleteAlert: Bool = false
@@ -43,7 +43,11 @@ struct JobDetailView: View {
                     .font(.system(size: 26))
                     .padding()
                     .foregroundColor(.white)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
+                    .background(
+                        RoundedRectangle(cornerRadius: 8).fill(
+                            Color("PrimaryColor")
+                        )
+                    )
             }
             .position(x: 360, y: 680)
             .alert("Eintrag löschen", isPresented: $showDeleteAlert) {
@@ -60,7 +64,11 @@ struct JobDetailView: View {
                     .font(.system(size: 32))
                     .padding(12)
                     .foregroundColor(.white)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(Color("SecondaryColor")))
+                    .background(
+                        RoundedRectangle(cornerRadius: 8).fill(
+                            Color("SecondaryColor")
+                        )
+                    )
             }
             .position(x: 48, y: 40)
         }
@@ -69,7 +77,16 @@ struct JobDetailView: View {
 }
 
 #Preview {
-    @Previewable var job: Job = Job(title: "iOS Developer", details: "Junior Stelle full remote", salary: 40000, skills: [Skill(title: "SwiftUI", level: .medium), Skill(title: "React", level: .low)], isFavorite: true)
+    @Previewable var job: Job = Job(
+        title: "iOS Developer",
+        details: "Junior Stelle full remote",
+        salary: 40000,
+        skills: [
+            Skill(title: "SwiftUI", level: .medium),
+            Skill(title: "React", level: .low),
+        ],
+        isFavorite: true
+    )
     @Previewable @State var isVisible: Bool = true
     JobDetailView(job: job, isVisible: $isVisible)
 }

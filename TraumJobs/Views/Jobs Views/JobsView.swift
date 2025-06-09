@@ -26,6 +26,7 @@ struct JobsView: View {
                     List {
                         ForEach(jobs) { job in
                             JobListItemView(job: job)
+                                .listRowSeparator(.hidden)
                                 .swipeActions {
                                     Button(role: .destructive) {
                                         context.delete(job)
@@ -75,6 +76,7 @@ struct JobsView: View {
             )
             .position(x: 356, y: 584)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

@@ -12,9 +12,10 @@ struct FavoritesView: View {
     @Query(
         filter: #Predicate<Job> { job in
             job.isFavorite
-        }
-        , sort: \Job.title) var jobs: [Job]
-    
+        },
+        sort: \Job.title
+    ) var jobs: [Job]
+
     var body: some View {
         VStack {
             Text("Favoriten")
@@ -26,8 +27,10 @@ struct FavoritesView: View {
                 List {
                     ForEach(jobs) { job in
                         JobListItemView(job: job)
+                            .listRowSeparator(.hidden)
                     }
                 }
+                .listStyle(.plain)
             }
         }
         .padding()

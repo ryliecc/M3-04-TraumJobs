@@ -39,7 +39,8 @@ struct JobAddView: View {
                         VStack {
                             TextField("Skill Titel", text: $newSkillName)
                             Picker("Skill Level", selection: $newSkillLevel) {
-                                ForEach(SkillLevel.allCases, id: \.rawValue) { level in
+                                ForEach(SkillLevel.allCases, id: \.rawValue) {
+                                    level in
                                     Text(level.rawValue).tag(level)
                                 }
                             }
@@ -47,7 +48,10 @@ struct JobAddView: View {
                             .frame(height: 56)
                         }
                         Button("Hinzufügen") {
-                            let newSkill = Skill(title: newSkillName, level: newSkillLevel)
+                            let newSkill = Skill(
+                                title: newSkillName,
+                                level: newSkillLevel
+                            )
                             skills.append(newSkill)
                             newSkillName = ""
                         }
@@ -64,7 +68,11 @@ struct JobAddView: View {
                     sheetIsVisible = false
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 8).fill(Color("SecondaryColor")))
+                .background(
+                    RoundedRectangle(cornerRadius: 8).fill(
+                        Color("SecondaryColor")
+                    )
+                )
                 .foregroundColor(.white)
                 .frame(width: .infinity)
                 Spacer()
@@ -76,7 +84,11 @@ struct JobAddView: View {
                 .disabled(title.isEmpty || details.isEmpty || salary <= 0)
                 .frame(width: .infinity)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor")))
+                .background(
+                    RoundedRectangle(cornerRadius: 8).fill(
+                        Color("PrimaryColor")
+                    )
+                )
                 .foregroundColor(.white)
             }
             .padding()
@@ -85,7 +97,12 @@ struct JobAddView: View {
     }
 
     private func addJob() {
-        let job = Job(title: title, details: details, salary: salary, skills: skills)
+        let job = Job(
+            title: title,
+            details: details,
+            salary: salary,
+            skills: skills
+        )
         context.insert(job)
     }
 
