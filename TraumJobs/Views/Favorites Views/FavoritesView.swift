@@ -16,13 +16,21 @@ struct FavoritesView: View {
         , sort: \Job.title) var jobs: [Job]
     
     var body: some View {
-        Text("Favoriten")
-            .font(.headline)
-        List {
-            ForEach(jobs) { job in
-                Text(job.title)
+        VStack {
+            Text("Favoriten")
+                .font(Fonts.listHeadline)
+            if jobs.isEmpty {
+                Text("Noch keine Favoriten...")
+                Spacer()
+            } else {
+                List {
+                    ForEach(jobs) { job in
+                        JobListItemView(job: job)
+                    }
+                }
             }
         }
+        .padding()
     }
 }
 

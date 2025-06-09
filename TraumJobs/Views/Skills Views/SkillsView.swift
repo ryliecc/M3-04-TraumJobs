@@ -14,20 +14,37 @@ struct SkillsView: View {
     @State var sheetIsVisible: Bool = false
     
     var body: some View {
-        VStack {
-            Text("Skills")
-                .font(.headline)
-            Button("Neuen Skill hinzufügen") {
-                sheetIsVisible = true
-            }
-            List {
-                ForEach(skills) { skill in
-                    Text(skill.title)
+        ZStack {
+            VStack {
+                Text("Skills")
+                    .font(Fonts.listHeadline)
+                if skills.isEmpty {
+                    Text("Noch keine Skills ...")
+                    Spacer()
+                } else {
+                    List {
+                        ForEach(skills) { skill in
+                            Text(skill.title)
+                        }
+                    }
                 }
             }
-        }
-        .sheet(isPresented: $sheetIsVisible) {
-            SkillAddView(sheetIsVisible: $sheetIsVisible)
+            .padding()
+            .sheet(isPresented: $sheetIsVisible) {
+                SkillAddView(sheetIsVisible: $sheetIsVisible)
+            }
+            Button {
+                sheetIsVisible = true
+            } label: {
+                Image(systemName: "plus")
+            }
+            .font(.system(size: 32))
+            .padding()
+            .foregroundColor(.white)
+            .background(
+                RoundedRectangle(cornerRadius: 8).fill(Color("PrimaryColor"))
+            )
+            .position(x: 356, y: 584)
         }
     }
 }

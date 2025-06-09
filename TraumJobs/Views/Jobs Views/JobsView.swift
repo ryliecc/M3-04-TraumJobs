@@ -54,6 +54,7 @@ struct JobsView: View {
                                 }
                         }
                     }
+                    .listStyle(.plain)
                 }
             }
             .padding()
